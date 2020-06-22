@@ -1,0 +1,21 @@
+.chosen-header {
+    display: flex;
+}
+
+.chosen-header * {
+    flex: 1;
+}
+
+.register-button {
+    border-radius: 5px;
+}
+
+.register-button:enabled {
+    background-color: blue;
+    color: white;
+}
+
+.register-button:disabled {
+    background-color: darkgray;
+    color: gray;
+}

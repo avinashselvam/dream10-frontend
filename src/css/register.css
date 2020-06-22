@@ -1,0 +1,12 @@
+.register-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-search {
+    flex: 1;
+}
+
+.right-chosen {
+    flex: 4;
+}
