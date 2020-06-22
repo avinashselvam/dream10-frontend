@@ -1,20 +1,32 @@
 import React, { Component } from 'react'
-import Sli from './sli'
+import Selectableli from './selectableli'
 
 class AvailableList extends Component {
 
     constructor() {
         super()
+        this.didSelectStock = this.didSelectStock.bind(this)
+
         this.state = {}
+
+    }
+
+    didSelectStock(stock) {
+        // calls register's didSelectStock
+        this.props.callback(stock)
     }
 
     
 
     render() {
-        const data = this.props.availableStocks
+        const availableStocks = this.props.availableStocks
+        let data = []
+        for (const stock in availableStocks) {
+            if (availableStocks[stock].visible) { data.push(stock) }
+        }
         return(
             <ul>
-                {data.map((stock, key) => <Sli key={key} stockName={stock}/>)}
+                {data.map((stock, key) => <Selectableli key={key} stockName={stock} callback={this.didSelectStock}/>)}
             </ul>
         )
     }

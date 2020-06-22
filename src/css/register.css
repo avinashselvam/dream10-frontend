@@ -5,6 +5,7 @@
 
 .left-search {
     flex: 1;
+    border: 1px gray;
 }
 
 .right-chosen {

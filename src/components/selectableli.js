@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Selectableli extends Component {
 
     handleChange(e) {
-        
+        this.props.callback(e)
     }
 
     render() {

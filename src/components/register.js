@@ -5,16 +5,6 @@ import ChosenList from './chosenlist'
 import stocks from '../data/stocks'
 import '../css/register.css'
 
-class Stock {
-
-    constructor(name) {
-        this.name = name
-        this.visible = true
-        this.chosen = false
-    }
-
-}
-
 function makeAvailableStocks(stocks) {
     let dict = {}
     for (const stock of stocks) {
@@ -31,6 +21,9 @@ class Register extends Component {
 
     constructor() {
         super()
+        this.handleSearch = this.handleSearch.bind(this)
+        this.didSelectStock = this.didSelectStock.bind(this)
+
         const availableStocks = makeAvailableStocks(stocks)
         this.state = {
             availableStocks: availableStocks,
@@ -48,13 +41,7 @@ class Register extends Component {
     }
 
     handleSearch(result) {
-        this.setState((prevState) => {
-            return ({
-                availableStocks: prevState.availableStocks,
-                filteredStocks: result,
-                chosenStocks: prevState.chosenStocks
-            })
-        })
+        this.setState(result)
     }
 
     isValidStep(step) {
@@ -69,15 +56,15 @@ class Register extends Component {
         
         return(
             <div className="register-container">
-                {/* <div className="left-search">
+                <div className="left-search">
                     <SearchBar
                     availableStocks={this.state.availableStocks}
-                    onSearch={this.handleSearch.bind(this)}/>
+                    callback={this.handleSearch.bind(this)}/>
                     <AvailableList
                     availableStocks={this.state.availableStocks}
                     onSelect={this.didSelectStock.bind(this)} />
                 </div>
-                <div className="right-chosen">
+                {/* <div className="right-chosen">
                 <ChosenList
                 chosenStocks={this.state.availableStocks}
                 isValidStep={this.isValidStep.bind(this)}/>
