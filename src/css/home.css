@@ -1,0 +1,17 @@
+.home-container {
+    text-align: center;
+    height: 90vh;
+}
+
+.home-container h1 {
+    font-size: 48px;
+    text-transform: uppercase;
+}
+
+.login-google {
+    border-radius: 5px;
+    padding: 8px;
+    background-color: white;
+    border: 1px lightgray solid;
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); */
+}

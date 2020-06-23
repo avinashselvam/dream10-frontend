@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import firebase from '../firebase'
+import '../css/leaderboard.css'
 
 class Leaderboard extends Component {
 
@@ -29,13 +30,24 @@ class Leaderboard extends Component {
         }
         console.log(arrayData)
         return(
+            <div className="table">
+            <div className="leaderboard-row table-header">
+                <p>Rank</p>
+                <p>Name</p>
+                <p>Score</p>
+            </div>
             <ul>
                 {
                 arrayData.map((value, key) => {
-                return <li key={key}>{key} {value.name} {value.score}</li>
+                return <div key={key} className="leaderboard-row">
+                    <p>{key}</p>
+                    <p>{value.name}</p>
+                    <p>{value.score}</p>
+                </div>
                 })
                 }
             </ul>
+            </div>
         )
     }
 

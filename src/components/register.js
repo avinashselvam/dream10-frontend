@@ -21,34 +21,6 @@ class Register extends Component {
 
     constructor() {
         super()
-        this.handleSearch = this.handleSearch.bind(this)
-        this.didSelectStock = this.didSelectStock.bind(this)
-
-        const availableStocks = makeAvailableStocks(stocks)
-        this.state = {
-            availableStocks: availableStocks,
-        }
-        console.log(availableStocks)
-    }
-
-    didSelectStock(stock) {
-        this.setState((prevState) => {
-            prevState.availableStocks[stock].chosen = true
-            return ({
-                availableStocks: prevState.availableStocks
-            })
-        })
-    }
-
-    handleSearch(result) {
-        this.setState(result)
-    }
-
-    isValidStep(step) {
-        return true
-    }
-
-    validForm() {
 
     }
 
@@ -57,18 +29,12 @@ class Register extends Component {
         return(
             <div className="register-container">
                 <div className="left-search">
-                    <SearchBar
-                    availableStocks={this.state.availableStocks}
-                    callback={this.handleSearch.bind(this)}/>
-                    <AvailableList
-                    availableStocks={this.state.availableStocks}
-                    onSelect={this.didSelectStock.bind(this)} />
+                    <SearchBar />
+                    <AvailableList />
                 </div>
-                {/* <div className="right-chosen">
-                <ChosenList
-                chosenStocks={this.state.availableStocks}
-                isValidStep={this.isValidStep.bind(this)}/>
-                </div> */}
+                <div className="right-chosen">
+                    <ChosenList />
+                </div>
             </div>
         )
     }

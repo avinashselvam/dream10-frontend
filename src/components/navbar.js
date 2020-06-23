@@ -26,9 +26,9 @@ class Navbar extends Component {
         const isUserLoggedIn = this.state.isUserLoggedIn
         return(
             <div className="navbar-container">
-                <Link to="/"> Dream 10 </Link>
+                <Link to="/"> DREAM 10 </Link>
                 <Link to="/register"> Register </Link>
-                { isUserLoggedIn ? <button className="log-out" onClick={this.logOut}>log out</button> : null }
+                { true ? <button className="log-out" onClick={this.logOut}>LogOut</button> : null }
             </div>
         )
     }

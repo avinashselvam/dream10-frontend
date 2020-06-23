@@ -1,31 +1,26 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import '../css/searchbar.css'
+
+const mapDispatchToProps = (dispatch) => {
+    return({
+        onSearch: 1
+    })
+}
 
 class SearchBar extends Component {
 
-    constructor(props) {
-        super(props)
-        this.handleChange = this.handleChange.bind(this)
-        this.availableStocks = this.props.availableStocks
-        this.callback = this.props.callback
-    }
-
-    handleChange(e) {
+    onSearch = (e) => {
         const searchPhrase = e.target.value.toUpperCase()
-        const filteredStocks = this.availableStocks
-        for (const stock in filteredStocks) {
-            if (stock.includes(searchPhrase) || searchPhrase === "") {
-                filteredStocks[stock].visible = true
-            } else { filteredStocks[stock].visible = false }
-        }
-        this.callback(filteredStocks)
+        return this.props.onSearch(e)
     }
 
     render() {
         return(
             <div className="searchbar-container">
+                <input className="searchbar-input" type="text" placeholder="Search" />
                 <p className="searchbar-title">Available Stocks</p>
-                <input className="searchbar-input" type="text" onChange={this.handleChange} placeholder="AAPL" />
             </div>
             
         )

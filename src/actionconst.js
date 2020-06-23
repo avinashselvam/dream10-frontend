@@ -1,0 +1,13 @@
+const LOGIN = "LOGIN"
+const LOGOUT = "LOGOUT"
+const TOGGLE_SELECTION = "TOGGLE_SELECTION"
+const TOGGLE_VISIBILITY = "TOGGLE_VISIBILITY"
+
+const actions = {
+    LOGIN,
+    LOGOUT,
+    TOGGLE_SELECTION,
+    TOGGLE_VISIBILITY
+}
+
+export default actions

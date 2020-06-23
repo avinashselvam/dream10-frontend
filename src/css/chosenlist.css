@@ -1,3 +1,7 @@
+.chosen-container {
+    padding: 16px;
+}
+
 .chosen-header {
     display: flex;
 }
@@ -18,4 +22,8 @@
 .register-button:disabled {
     background-color: darkgray;
     color: gray;
+}
+
+.register-button-container {
+    display: flex;
 }

@@ -1,36 +1,30 @@
 import React, { Component } from 'react'
 import Selectableli from './selectableli'
+import { connect } from 'react-redux'
+
+const mapStateToProps = (state) => {
+    return ({
+        availableStocks: state.visible
+    })
+}
 
 class AvailableList extends Component {
 
-    constructor() {
-        super()
-        this.didSelectStock = this.didSelectStock.bind(this)
-
-        this.state = {}
-
-    }
-
-    didSelectStock(stock) {
-        // calls register's didSelectStock
-        this.props.callback(stock)
-    }
-
-    
-
     render() {
+        let visibleStocks = []
         const availableStocks = this.props.availableStocks
-        let data = []
         for (const stock in availableStocks) {
-            if (availableStocks[stock].visible) { data.push(stock) }
+            if (availableStocks[stock]) visibleStocks.push(stock)
         }
         return(
             <ul>
-                {data.map((stock, key) => <Selectableli key={key} stockName={stock} callback={this.didSelectStock}/>)}
+                {visibleStocks.map((stock, key) => {
+                    return (<Selectableli key={key} value={stock} />)
+                })}
             </ul>
         )
     }
 
 }
 
-export default AvailableList
+export default connect(mapStateToProps)(AvailableList)

@@ -1,0 +1,15 @@
+.contest-container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+
+.contestboard {
+    padding: 16px;
+    flex: 3;
+}
+
+.leaderboard {
+    padding: 16px;
+    flex: 1;
+}
