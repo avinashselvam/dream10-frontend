@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { toggleSelection } from '../actions'
+import '../css/selectableli.css'
 
 const mapDisptachToProps = (dispatch) => {
     return {
@@ -20,9 +21,11 @@ class Selectableli extends Component {
 
     render() {
         const stockname = this.props.value
-        console.log(this.props)
         return(
-             <p><input type="checkbox" onChange={this.selectStock}/> {stockname}</p>
+             <label className="selectable-row">
+                 <input className="selectable-checkbox" type="checkbox" checked={this.props.isChecked} onChange={this.selectStock}/>
+                 <p>{stockname}</p>
+            </label>
         )
     }
 

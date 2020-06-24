@@ -1,3 +1,7 @@
+.chosen-tabletop * {
+    display: inline-block;
+}
+
 .chosen-container {
     padding: 16px;
 }
@@ -11,7 +15,7 @@
 }
 
 .register-button {
-    border-radius: 5px;
+    padding: 12px 18px;
 }
 
 .register-button:enabled {
@@ -25,5 +29,34 @@
 }
 
 .register-button-container {
-    display: flex;
+    float: right;
+}
+
+.chosen-title * {
+    display: block;
+}
+
+.chosen-title h1 {
+    margin: 0;
+}
+
+.tooltip {
+    position: relative;
+    color: gray;
+    cursor: pointer;
+}
+
+.tooltip .tooltip-text{
+    display: none;
+}
+
+.tooltip:hover .tooltip-text{
+    display: block;
+    min-width: 200px;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    padding: 12px;
+    color: white;
+    background-color: blue;
 }

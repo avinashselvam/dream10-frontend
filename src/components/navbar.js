@@ -1,34 +1,37 @@
 import React , { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { logout } from '../actions'
 import firebase from '../firebase'
 import '../css/navbar.css'
 
+const mapDispatchToProps = (dispatch) => {
+    return({
+        logout: dispatch(logout())
+    })
+}
+
+const mapStateToProps = (state) => {
+    return({
+        isUserLoggedIn: (state.uid !== null)
+    })
+}
+
 class Navbar extends Component {
 
-    constructor() {
-        super()
-        this.state = {
-            isUserLoggedIn: firebase.auth().currentUser !== null
-        }
-        this.logOut = this.logOut.bind(this)
-    }
-
-    logOut() {
+    logout = () => {
         firebase.auth().signOut().then(() => {
-            this.setState({
-                isUserLoggedIn: false
-            })
-            console.log("logged out")
+            this.props.logout()
+            this.props.history.push("/")
         }).catch((err) => console.log(err))
     }
 
     render() {
-        const isUserLoggedIn = this.state.isUserLoggedIn
+        const isUserLoggedIn = this.props.isUserLoggedIn
         return(
             <div className="navbar-container">
                 <Link to="/"> DREAM 10 </Link>
                 <Link to="/register"> Register </Link>
-                { true ? <button className="log-out" onClick={this.logOut}>LogOut</button> : null }
+                { isUserLoggedIn ? <button className="log-out" onClick={this.logout}>LogOut</button> : null }
             </div>
         )
     }

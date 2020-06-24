@@ -1,0 +1,24 @@
+.selectable-checkbox {
+    display: none;
+}
+
+.selectable-checkbox:checked + p {
+    color: royalblue;
+    background-color: rgba(0,0,250,0.1);
+}
+
+.selectable-row {
+    width: 100%;
+    display: inline-block;
+}
+
+.selectable-row p {
+    width: 90%;
+    padding: 12px 5%;
+    margin: 0;
+}
+
+.selectable-row:hover {
+    cursor: pointer;
+    background-color: rgb(250, 250, 250);
+}

@@ -4,35 +4,34 @@ import { Switch, Route } from 'react-router-dom'
 import Register from './components/register'
 import Home from './components/home'
 import Contest from './components/contest'
-import firebase from './firebase'
+import { connect } from 'react-redux'
 import './css/app.css'
+
+const mapStateToProps = (state) => {
+    return({
+        uid: state.uid
+    })
+}
 
 
 class App extends Component {
 
-  constructor() {
-      super()
-      this.state = {
-          isUserLoggedIn: firebase.auth().currentUser !== null
-      }
-  }
-
-  render() {
-      const isUserLoggedIn = this.state.isUserLoggedIn
-    return (
-        <div className="qwe">
-            <div className="navbar"> <Navbar/> </div>
-            <div className="page">
-            <Switch>
-            <Route path="/" exact component={ isUserLoggedIn ? Contest : Home }></Route>
-            <Route path="/register" component={Register}></Route>
-            <Route path="/contest" component={Contest}></Route>
-            </Switch>
+    render() {
+        const isUserLoggedIn = (this.props.uid !== null)
+        return (
+            <div className="whole">
+                <div className="navbar"> <Navbar/> </div>
+                <div className="page">
+                    <Switch>
+                    <Route path="/" exact component={ isUserLoggedIn ? Contest : Home }></Route>
+                    <Route path="/register" component={ isUserLoggedIn ? Register : Home }></Route>
+                    <Route path="/contest" component={Contest}></Route>
+                    </Switch>
+                </div>
             </div>
-        </div>
-        )
+            )
     }
 
 }
 
-export default App
+export default connect()(App)

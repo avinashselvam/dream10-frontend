@@ -1,0 +1,24 @@
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle p:hover {
+    cursor: pointer;
+}
+
+.toggle-checkbox + p > .short {
+    color: red;
+}
+
+.toggle-checkbox + p > .long {
+    color: gray;
+}
+
+
+.toggle-checkbox:checked + p > .long {
+    color: green;
+}
+
+.toggle-checkbox:checked + p > .short {
+    color: gray;
+}

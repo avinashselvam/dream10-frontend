@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { toggleVisibility } from '../actions'
 import { connect } from 'react-redux'
 
 import '../css/searchbar.css'
 
 const mapDispatchToProps = (dispatch) => {
     return({
-        onSearch: 1
+        onSearch: x => dispatch(toggleVisibility(x))
     })
 }
 
@@ -13,13 +14,13 @@ class SearchBar extends Component {
 
     onSearch = (e) => {
         const searchPhrase = e.target.value.toUpperCase()
-        return this.props.onSearch(e)
+        this.props.onSearch(searchPhrase)
     }
 
     render() {
         return(
             <div className="searchbar-container">
-                <input className="searchbar-input" type="text" placeholder="Search" />
+                <input className="searchbar-input" type="text" placeholder="Search" onChange={this.onSearch}/>
                 <p className="searchbar-title">Available Stocks</p>
             </div>
             
@@ -28,4 +29,4 @@ class SearchBar extends Component {
 
 }
 
-export default SearchBar
+export default connect(null, mapDispatchToProps)(SearchBar)
