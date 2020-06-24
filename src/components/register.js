@@ -2,30 +2,22 @@ import React, { Component } from 'react'
 import SearchBar from './searchbar'
 import AvailableList from './availablelist'
 import ChosenList from './chosenlist'
+import { connect } from 'react-redux'
 import stocks from '../data/stocks'
 import '../css/register.css'
+import { Redirect } from 'react-router-dom'
 
-function makeAvailableStocks(stocks) {
-    let dict = {}
-    for (const stock of stocks) {
-        dict[stock] = {
-            visible: true,
-            chosen: false
-        }
-    } 
-    return dict
+const mapStateToProps = (state) => {
+    return({
+        isUserLoggedIn: (state.uid !== null)
+    })
 }
 
 
 class Register extends Component {
 
-    constructor() {
-        super()
-
-    }
-
     render() {
-        
+        if (!this.props.isUserLoggedIn) return <Redirect to="/" />
         return(
             <div className="register-container">
                 <div className="left-search">
@@ -41,4 +33,4 @@ class Register extends Component {
 
 }
 
-export default Register
+export default connect(mapStateToProps)(Register)

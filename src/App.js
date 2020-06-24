@@ -9,7 +9,7 @@ import './css/app.css'
 
 const mapStateToProps = (state) => {
     return({
-        uid: state.uid
+        isUserLoggedIn: (state.uid !== null)
     })
 }
 
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 class App extends Component {
 
     render() {
-        const isUserLoggedIn = (this.props.uid !== null)
+        const isUserLoggedIn = this.props.isUserLoggedIn
         return (
             <div className="whole">
                 <div className="navbar"> <Navbar/> </div>
@@ -25,7 +25,7 @@ class App extends Component {
                     <Switch>
                     <Route path="/" exact component={ isUserLoggedIn ? Contest : Home }></Route>
                     <Route path="/register" component={ isUserLoggedIn ? Register : Home }></Route>
-                    <Route path="/contest" component={Contest}></Route>
+                    {/* <Route path="/contest" component={Contest}></Route> */}
                     </Switch>
                 </div>
             </div>
@@ -34,4 +34,4 @@ class App extends Component {
 
 }
 
-export default connect()(App)
+export default connect(mapStateToProps)(App)

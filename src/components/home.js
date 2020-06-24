@@ -1,29 +1,39 @@
 import React , { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { login } from '../actions'
 import firebase from '../firebase'
 import '../css/home.css'
+
+const mapStateToProps = (state) => {
+    return({
+        isUserLoggedIn: (state.uid !== null)
+    })
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return({
+        login: (x) => dispatch(login(x))
+    })
+}
 
 class Home extends Component {
 
     constructor() {
         super()
-        this.signIn = this.signIn.bind(this)
-        this.state = {
-            isUserLoggedIn: false
-        }
+        // this.signIn = this.signIn.bind(this)
     }
 
-    signIn() {
+    signIn = () => {
         let provider = new firebase.auth.GoogleAuthProvider()
         firebase.auth().signInWithPopup(provider).then((result) => {
             var user = result.user
-            console.log(user.uid)
-            this.setState({ isUserLoggedIn: true })
+            this.props.login(user.uid)
         }).catch((err) => {console.log(err)})
     }
 
     render() {
-        if (this.state.isUserLoggedIn) { return <Redirect to="/contest" /> }
+        if (this.props.isUserLoggedIn) { return <Redirect to="/contest" /> }
         return(
             <div className="home-container"> 
             <h1>DREAM 10 is a platform to test your market knowledge. Join now to play</h1>
@@ -37,4 +47,4 @@ class Home extends Component {
 
 }
 
-export default Home
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
