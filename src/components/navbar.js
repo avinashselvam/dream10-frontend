@@ -23,7 +23,6 @@ class Navbar extends Component {
     logout = () => {
         firebase.auth().signOut().then(() => {
             this.props.logout()
-            console.log(this.props)
         }).catch((err) => console.log(err))
     }
 

@@ -19,17 +19,20 @@ const mapDispatchToProps = (dispatch) => {
 
 class Home extends Component {
 
-    constructor() {
-        super()
-        // this.signIn = this.signIn.bind(this)
-    }
-
     signIn = () => {
         let provider = new firebase.auth.GoogleAuthProvider()
-        firebase.auth().signInWithPopup(provider).then((result) => {
-            var user = result.user
-            this.props.login(user.uid)
-        }).catch((err) => {console.log(err)})
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(
+            firebase.auth().signInWithPopup(provider).then((result) => {
+                var user = result.user
+                if (result.additionalUserInfo.isNewUser) {
+                    firebase.firestore().collection("users").doc(user.uid).set({
+                        name: user.displayName,
+                        email: user.email
+                    })
+                }
+                this.props.login(user.uid)
+            }).catch((err) => {console.log(err)})
+        ).catch((err) => console.log(err))
     }
 
     render() {

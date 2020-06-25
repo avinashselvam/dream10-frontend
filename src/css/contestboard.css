@@ -7,3 +7,7 @@
 .contestboard-row * {
     flex: 1;
 }
+
+p > a {
+    color: blue;
+}

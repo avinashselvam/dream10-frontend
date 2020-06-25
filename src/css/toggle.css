@@ -11,14 +11,14 @@
 }
 
 .toggle-checkbox + p > .long {
-    color: gray;
+    color: lightgray;
 }
 
 
 .toggle-checkbox:checked + p > .long {
-    color: green;
+    color: yellowgreen;
 }
 
 .toggle-checkbox:checked + p > .short {
-    color: gray;
+    color: lightgray;
 }

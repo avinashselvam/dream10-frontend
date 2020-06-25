@@ -40,6 +40,10 @@
     margin: 0;
 }
 
+.chosen-title p {
+    color:  red;
+}
+
 .tooltip {
     position: relative;
     color: gray;

@@ -18,7 +18,7 @@ class Toggle extends Component {
             <div>
                 <div className="toggle">
                     <label className="toggle-label">
-                        <input type="checkbox" class="toggle-checkbox" onChange={this.onToggle}/>
+                        <input type="checkbox" className="toggle-checkbox" onChange={this.onToggle}/>
                         <p><span className="long">LONG</span> / <span className="short">SHORT</span></p>
                     </label>
                 </div>

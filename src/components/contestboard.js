@@ -1,22 +1,27 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import firebase from '../firebase'
+import { UTCYesterday } from '../day'
 import '../css/contestboard.css'
 
-class Contestboard extends Component {
+const mapStateToProps = (state) => {
+    return({
+        uid: state.uid
+    })
+}
 
-    // constructor() {
-    //     super()
-    // }
+class Contestboard extends Component {
 
     componentDidMount() {
         this.read()
     }
 
     read() {
-        let db = firebase.firestore()
-        // let uid = firebase.auth().currentUser.uid
+        const uid = this.props.uid
 
-        let contestDocument = db.collection("Friday").doc("8pDfN3bV06hDgbWavbkCyzNyhzD3")
+        let db = firebase.firestore()
+        let contestDocument = db.collection(UTCYesterday()).doc(uid)
         contestDocument.get().then((doc) => {
             if (doc.exists) {
                 this.setState(doc.data())
@@ -29,7 +34,11 @@ class Contestboard extends Component {
     render() {
         const data = this.state
         if (data===null) return (<p>Fetching details</p>)
-        else if (data.didNotRegister) return (<p>Did not register for contest on {}</p>)
+        else if (data.didNotRegister) return (
+            <p>You did not register for this contest.
+                <Link to="/register">Register</Link>for next contest now.
+            </p>
+            )
 
         const arrayData = []
         for (const stock in data) {
@@ -63,4 +72,4 @@ class Contestboard extends Component {
     }
 }
 
-export default Contestboard
+export default connect(mapStateToProps)(Contestboard)

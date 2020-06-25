@@ -2,6 +2,7 @@ import React , { Component } from 'react'
 import { connect } from 'react-redux'
 import Chosenli from './chosenli'
 import Tooltip from './tooltip'
+import { UTCDay } from '../day'
 import firebase from '../firebase'
 import '../css/chosenlist.css'
 
@@ -11,6 +12,12 @@ const matchStateToProps = (state) => {
         weights: state.weights,
         decisions: state.decisions,
         message: state.message
+    })
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return({
+        userHasRegistered : dispatch()
     })
 }
 
@@ -30,8 +37,10 @@ class ChosenList extends Component {
         }
 
         let db = firebase.firestore()
-        let userDocument = db.collection("Thursday").doc(uid)
+        let userDocument = db.collection(UTCDay()).doc(uid)
         userDocument.set(data)
+        
+        this.userHasRegistered()
     }
 
     valid = () => {
